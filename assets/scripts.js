@@ -49,7 +49,11 @@ function getCity(search) {
         })
         // Pass the location data to the getWeather function
         .then(function (data) {
-            getWeather(data[0])
+            if (!data[0]) {
+                alert("Location not found");
+            } else {
+                getWeather(data[0]);
+            }
             // console log name of the city 
             console.log(coordinates)
         })
@@ -93,7 +97,7 @@ function splitFunction(city, data) {
     console.log(city)
     currentWether(city, data.list[0])
     foreCastWether(data.list)
-    console.log(city , data.list[0], data.list)
+    console.log(city, data.list[0], data.list)
 }
 
 
