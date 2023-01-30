@@ -43,8 +43,8 @@ function getCity(search) {
     console.log(coordinates)
     fetch(coordinates)
         // Convert the response to json
-        .then(function (res) {
-            return res.json()
+        .then(function (response) {
+            return response.json()
             console.log(coordinates)
         })
         // Pass the location data to the getWeather function
@@ -58,23 +58,23 @@ function getCity(search) {
 }
 
 // Get the weather forecast for the specified location
-function getWeather(location) {
+function getWeather(coordinates) {
     // Log the location data to the console
-    console.log(location)
+    console.log(coordinates)
     // Destructure the lat and lon properties from the location data
-    let lat = location.lat; let lon = location.lon;
+    let lat = coordinates.lat; let lon = coordinates.lon;
     // Log the latitude and longitude to the console
     console.log(lat, lon)
     // Store the city name in the city variable
-    let city = location.name
+    let city = coordinates.name
     // Create the URL for the fetch request to the OpenWeatherMap API
-    let wetherURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
+    let wetherURL = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
     // Make the fetch request
     fetch(wetherURL)
     console.log(wetherURL)
         // Convert the response to json
-        .then(function (res) {
-            return res.json()
+        .then(function (response) {
+            return response.json()
         })
         // Pass the city and data to the splitFunction
         .then(function (data) {
@@ -84,6 +84,7 @@ function getWeather(location) {
         .catch(error => console.error(error))
 }
 
+//!  changing all location to cordiantes 
 
 
 // Split the data for current weather and forecast
@@ -92,6 +93,11 @@ function splitFunction(city, data) {
     console.log(city)
     currentWether(city, data.list[0])
     foreCastWether(data.list)
+    console.log(city , data.list[0], data.list)
 }
+
+
+
+
 
 
